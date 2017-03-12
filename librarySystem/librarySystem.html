@@ -42,7 +42,16 @@ tests({
     eq(librarySystem('fullName'), 'Gustav Larsson');
   },
   'The callback function is only run once': function() {
-    
+    var timesCallbackHasRun = 0;
+    librarySystem('myCallbackShouldRunOnce', [], function () {
+      timesCallbackHasRun++;
+      return 'something';
+    });
+
+    librarySystem('myCallbackShouldRunOnce');
+    librarySystem('myCallbackShouldRunOnce');
+
+    eq(timesCallbackHasRun, 1);
   }
 });
 </script>

@@ -19,8 +19,8 @@
       var dependentLibraries = [];
       dependentLibraries = library.dependencies.map(dependencyName => librarySystem(dependencyName));
 
-      library.storedLibrary = library.callback(...dependentLibraries);
-      return library.storedLibrary;
+      libraryStorage[libraryName].storedLibrary = library.callback(...dependentLibraries);
+      return libraryStorage[libraryName].storedLibrary;
     }
   }
 
