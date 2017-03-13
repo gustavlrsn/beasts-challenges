@@ -43,6 +43,16 @@ tests({
     };
     var myDog = Object.create(dog);
     eq(isPrototypeOf(Object.prototype, myDog), true);
+  },
+  'It should return false for an object whose prototype is null': function() {
+    var canine = {
+      bark: function() {
+        console.log('bark');
+      }
+    };
+    var dog = Object.create(canine);
+    var empty = Object.create(null);
+    eq(isPrototypeOf(dog, empty), false);
   }
 });
 </script>
