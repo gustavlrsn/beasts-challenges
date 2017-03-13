@@ -1,0 +1,48 @@
+<script src="isPrototypeOf.js"></script>
+<script src="tinytest.js"></script>
+<script>
+
+tests({
+  'It should find an objects prototype': function() {
+    var dog = {
+      bark: function() {
+        console.log('bark');
+      }
+    };
+    var myDog = Object.create(dog);
+    eq(isPrototypeOf(dog, myDog), true);
+  },
+  'It should find an objects prototype further back in the chain': function() {
+    var canine = {
+      bark: function() {
+        console.log('bark');
+      }
+    };
+    var dog = Object.create(canine);
+    dog.fetch = function() {
+      console.log('fetch');
+    };
+    var myDog = Object.create(dog);
+
+    eq(isPrototypeOf(canine, myDog), true);
+  },
+  'It should return false when an object is not the prototype of the other object': function() {
+    var dog = {
+      bark: function() {
+        console.log('bark');
+      }
+    };
+    var myDog = Object.create(dog);
+    eq(isPrototypeOf(myDog, dog), false);
+  },
+  'It should return true for any object against Object.prototype': function() {
+    var dog = {
+      bark: function() {
+        console.log('bark');
+      }
+    };
+    var myDog = Object.create(dog);
+    eq(isPrototypeOf(Object.prototype, myDog), true);
+  }
+});
+</script>
